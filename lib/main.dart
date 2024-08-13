@@ -18,6 +18,7 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(appBarTheme: appBar_Theme()),
       title: AllStrings().appTitle,
       home: const LoginPage(),
