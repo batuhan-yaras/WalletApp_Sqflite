@@ -27,4 +27,7 @@ class AllStrings {
 
   final successfulLogin = "Successfully logged in.";
   final successfulRegister = "Successfully signed up.";
+  final registerSubTitle = 'You are going to be directed to the login page in 3 seconds.';
+  final transferTitle = 'Successful';
+  final transferSubTitle = 'You transferred your money successfully.';
 }

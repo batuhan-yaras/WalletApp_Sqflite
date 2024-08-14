@@ -6,6 +6,7 @@ import 'package:wallet_app/login_page.dart';
 import 'package:wallet_app/product/all_colors.dart';
 import 'package:wallet_app/product/all_paddings.dart';
 import 'package:wallet_app/product/all_strings.dart';
+import 'package:wallet_app/product/login_signup_alert.dart';
 import 'package:wallet_app/product/username_avatar_image.dart';
 import 'package:wallet_app/view/user_list/model/user_database_provider.dart';
 
@@ -68,6 +69,13 @@ class _WalletPageViewState extends State<WalletPageView> {
 
     await _userDatabaseProvider.transferMoney(widget.id, walletId, amount);
     print('Transfer başarılı.');
+    showDialog(
+        barrierColor: Colors.black.withOpacity(0.5),
+        context: context,
+        builder: (BuildContext context) {
+          return SignedInSuccessfully(
+              textTitle: AllStrings().transferTitle, textSubtitle: AllStrings().transferSubTitle);
+        });
 
     setState(() {
       _currentMoney -= amount; // Kullanıcının mevcut bakiyesini güncelle

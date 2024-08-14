@@ -32,13 +32,14 @@ class LoginFailed extends StatelessWidget {
 }
 
 class SignedInSuccessfully extends StatelessWidget {
-  const SignedInSuccessfully({super.key});
-
+  const SignedInSuccessfully({super.key, required this.textTitle, required this.textSubtitle});
+  final String textTitle;
+  final String textSubtitle;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        AllStrings().successfulRegister,
+        textTitle,
         style: Theme.of(context)
             .textTheme
             .titleLarge
@@ -49,7 +50,7 @@ class SignedInSuccessfully extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'You are going to be directed to the login page in 3 seconds.',
+            textSubtitle,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: TextFieldColors().fieldBorderColor),
           ),
         ],

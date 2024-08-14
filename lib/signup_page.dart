@@ -140,7 +140,8 @@ class _SignupPageState extends State<SignupPage> {
             barrierColor: Colors.black.withOpacity(0.5),
             context: context,
             builder: (BuildContext context) {
-              return const SignedInSuccessfully();
+              return SignedInSuccessfully(
+                  textTitle: AllStrings().successfulRegister, textSubtitle: AllStrings().registerSubTitle);
             });
       } else {
         print('Kullanıcı eklenirken bir hata oluştu.');
