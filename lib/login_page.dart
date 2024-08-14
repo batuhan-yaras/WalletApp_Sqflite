@@ -6,7 +6,7 @@ import 'package:wallet_app/product/all_paddings.dart';
 import 'package:wallet_app/product/all_strings.dart';
 import 'package:wallet_app/core/widget_themes/text_field_widget.dart';
 import 'package:wallet_app/core/widget_themes/title_styles.dart';
-import 'package:wallet_app/product/login_alert.dart';
+import 'package:wallet_app/product/login_signup_alert.dart';
 import 'package:wallet_app/signup_page.dart';
 import 'package:wallet_app/view/user_list/model/user_database_provider.dart';
 import 'package:wallet_app/wallet_page.dart';
@@ -91,6 +91,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               if (_loginFailed)
                 LoginFailed(
+                  color: AllColors().errorContainer,
                   text: AllStrings().loginFailed,
                 ),
               MainButton(
@@ -106,6 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                   TextButtonRow(
                     text: AllStrings().signup,
                     onPressed: () {
+                      Future.delayed(Durations.long4);
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => const SignupPage()),

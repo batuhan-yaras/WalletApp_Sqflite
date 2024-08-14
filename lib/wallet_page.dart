@@ -7,14 +7,73 @@ import 'package:wallet_app/product/all_colors.dart';
 import 'package:wallet_app/product/all_paddings.dart';
 import 'package:wallet_app/product/all_strings.dart';
 import 'package:wallet_app/product/username_avatar_image.dart';
+import 'package:wallet_app/view/user_list/model/user_database_provider.dart';
 
 //herkese rastgele money atayacağım. Chatgpt de var.
-class WalletPageView extends StatelessWidget {
+class WalletPageView extends StatefulWidget {
   final String email;
   final String username;
   final int id;
   final double money;
+
   const WalletPageView({super.key, required this.email, required this.username, required this.id, required this.money});
+
+  @override
+  State<WalletPageView> createState() => _WalletPageViewState();
+}
+
+class _WalletPageViewState extends State<WalletPageView> {
+  final _usernameController = TextEditingController();
+  final _walletIdController = TextEditingController();
+  final _amountController = TextEditingController();
+
+  final UserDatabaseProvider _userDatabaseProvider = UserDatabaseProvider();
+
+  late double _currentMoney;
+  @override
+  void initState() {
+    super.initState();
+    _currentMoney = widget.money;
+    _userDatabaseProvider.open(); // Veritabanını aç
+  }
+
+  Future<void> _transferMoney() async {
+    final username = _usernameController.text.trim();
+    final walletIdString = _walletIdController.text.trim();
+    final amountString = _amountController.text.trim();
+
+    if (username.isEmpty || walletIdString.isEmpty || amountString.isEmpty) {
+      print('Transfer başarısız.');
+      return;
+    }
+
+    final walletId = int.tryParse(walletIdString);
+    final amount = double.tryParse(amountString);
+
+    if (walletId == null || amount == null) {
+      print('Transfer başarısız.2');
+      return;
+    }
+
+    final recipientUser = await _userDatabaseProvider.getItem(walletId);
+    if (recipientUser == null || recipientUser.username != username) {
+      print('Kullanıcı uyuşmuyor.');
+      return;
+    }
+
+    if (amount <= 0 || amount > widget.money) {
+      print('Geçersiz miktar.');
+      return;
+    }
+
+    await _userDatabaseProvider.transferMoney(widget.id, walletId, amount);
+    print('Transfer başarılı.');
+
+    setState(() {
+      _currentMoney -= amount; // Kullanıcının mevcut bakiyesini güncelle
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -63,19 +122,19 @@ class WalletPageView extends StatelessWidget {
                   _sizedBoxHalf(),
                   WalletInfoTitle(text: AllStrings().emailAdress),
                   _sizedBoxHalf(),
-                  WalletInfoSubtitle(text: email),
+                  WalletInfoSubtitle(text: widget.email),
                   _sizedBoxFull(),
                   WalletInfoTitle(text: AllStrings().username),
                   _sizedBoxHalf(),
-                  WalletInfoSubtitle(text: username),
+                  WalletInfoSubtitle(text: widget.username),
                   _sizedBoxFull(),
                   WalletInfoTitle(text: AllStrings().amountOfMoney),
                   _sizedBoxHalf(),
-                  WalletInfoSubtitle(text: '$money \$'),
+                  WalletInfoSubtitle(text: '$_currentMoney \$'),
                   _sizedBoxFull(),
                   WalletInfoTitle(text: AllStrings().walletId),
                   _sizedBoxHalf(),
-                  WalletInfoSubtitle(text: '$id')
+                  WalletInfoSubtitle(text: '${widget.id}')
                 ])),
             Padding(
                 padding: AllPaddings().appPadding + AllPaddings().topPadding,
@@ -84,15 +143,30 @@ class WalletPageView extends StatelessWidget {
                   WalletInfoTitle(text: AllStrings().transferMoneytoAnother),
                   _sizedBoxHalf(),
                   WalletInfoSubtitle(text: AllStrings().receiverInfos),
-                  const TextFieldStyles(
-                      labeltext: 'Username', iconField: null, fieldInputType: TextInputType.name, maxLength: 20),
-                  const TextFieldStyles(
-                      labeltext: 'Wallet ID', iconField: null, fieldInputType: TextInputType.name, maxLength: 20),
-                  const TextFieldStyles(
-                      labeltext: 'Amount', iconField: null, fieldInputType: TextInputType.name, maxLength: 20),
+                  TextFieldStyles(
+                    labeltext: 'Username',
+                    controller: _usernameController,
+                    iconField: null,
+                    fieldInputType: TextInputType.name,
+                    maxLength: 20,
+                  ),
+                  TextFieldStyles(
+                      controller: _walletIdController,
+                      labeltext: 'Wallet ID',
+                      iconField: null,
+                      fieldInputType: TextInputType.name,
+                      maxLength: 20),
+                  TextFieldStyles(
+                      controller: _amountController,
+                      labeltext: 'Amount',
+                      iconField: null,
+                      fieldInputType: TextInputType.name,
+                      maxLength: 20),
                   MainButton(
                     text: AllStrings().send,
-                    onPressed: () {},
+                    onPressed: () async {
+                      await _transferMoney();
+                    },
                     height: 40,
                     width: 140,
                     fontSize: 12,
@@ -118,5 +192,6 @@ class WalletPageView extends StatelessWidget {
   }
 
   SizedBox _sizedBoxFull() => const SizedBox(height: 40);
+
   SizedBox _sizedBoxHalf() => const SizedBox(height: 20);
 }

@@ -4,14 +4,22 @@ import 'package:wallet_app/view/user_list/model/user_model.dart';
 class UserDatabaseProvider {
   final String _userPath = "user";
   final String _userTableName = "users";
-  final int _version = 1;
+  final int _version = 2;
+
+  final String _transferTableName = "transfers";
+  String transferId = "transfer_id";
+  String senderId = "senderId";
+  String receiverId = "receiverId";
+  String transferAmount = "amount";
+  String transferDate = "transferDate";
+
   Database? database;
 
   String columnUsername = "username";
   String columnPassword = "password";
   String columnEmail = "email";
   String columnId = "id";
-  String columnMoney = 'money';
+  String columnMoney = "money";
 
   Future<void> open() async {
     database = await openDatabase(
@@ -19,9 +27,11 @@ class UserDatabaseProvider {
       version: _version,
       onCreate: (db, version) {
         createTable(db);
+        createTransferTable(db);
       },
       onUpgrade: (db, oldVersion, newVersion) {
         if (oldVersion < newVersion) {
+          // Veritabanı şemasını güncelle
           db.execute(
             '''ALTER TABLE $_userTableName ADD COLUMN $columnMoney REAL DEFAULT 100.0''',
           );
@@ -49,6 +59,21 @@ class UserDatabaseProvider {
           $columnMoney REAL DEFAULT 100.0)
           ''',
     );
+  }
+
+  Future<UserModel?> getItem(int id) async {
+    final db = await getDatabase();
+    final userMaps = await db.query(
+      _userTableName,
+      where: '$columnId = ?',
+      whereArgs: [id],
+    );
+
+    if (userMaps.isNotEmpty) {
+      return UserModel.fromJson(userMaps.first);
+    } else {
+      return null;
+    }
   }
 
   Future<List<UserModel>> getList() async {
@@ -128,5 +153,44 @@ class UserDatabaseProvider {
     } else {
       return null;
     }
+  }
+
+  Future<void> createTransferTable(Database db) async {
+    await db.execute(
+      '''CREATE TABLE $_transferTableName (
+          $transferId INTEGER PRIMARY KEY AUTOINCREMENT,
+          $senderId INTEGER,
+          $receiverId INTEGER,
+          $transferAmount REAL,
+          $transferDate TEXT,
+          FOREIGN KEY($senderId) REFERENCES users(id),
+          FOREIGN KEY($receiverId) REFERENCES users(id)
+          )''',
+    );
+  }
+
+  Future<void> transferMoney(int senderId, int receiverId, double amount) async {
+    final db = await getDatabase();
+
+    await db.transaction((txn) async {
+      // Sender'ın bakiyesini güncelle
+      await txn.rawUpdate(
+        'UPDATE $_userTableName SET $columnMoney = $columnMoney - ? WHERE $columnId = ?',
+        [amount, senderId],
+      );
+
+      // Receiver'ın bakiyesini güncelle
+      await txn.rawUpdate(
+        'UPDATE $_userTableName SET $columnMoney = $columnMoney + ? WHERE $columnId = ?',
+        [amount, receiverId],
+      );
+/*
+      // Transfer detaylarını ekle
+      await txn.rawInsert(
+        'INSERT INTO $_transferTableName ($transferId, $senderId, $receiverId, $transferAmount, $transferDate) VALUES (?,?,?,?,?)',
+        [null, senderId, receiverId, amount, DateTime.now().toIso8601String()],
+      );
+      */
+    });
   }
 }

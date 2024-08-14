@@ -6,6 +6,7 @@ class AllColors {
   final Color bottomTabColor = const Color.fromARGB(255, 44, 23, 23);
   final Color errorColor = const Color.fromARGB(255, 180, 37, 37);
   final Color errorContainer = const Color.fromARGB(255, 94, 41, 41);
+  final Color successfulColor = const Color.fromARGB(255, 62, 92, 54);
 }
 
 class TextFieldColors {

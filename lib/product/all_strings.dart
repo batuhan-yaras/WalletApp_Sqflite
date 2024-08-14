@@ -24,4 +24,7 @@ class AllStrings {
   final signupFailedUsername = "Username is already taken.";
   final signupFailedEmail = "Email address is already taken.";
   final signupFailedBoth = "Username and Email address is already taken.";
+
+  final successfulLogin = "Successfully logged in.";
+  final successfulRegister = "Successfully signed up.";
 }

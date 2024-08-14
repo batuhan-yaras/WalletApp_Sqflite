@@ -8,7 +8,7 @@ import 'package:wallet_app/login_page.dart';
 import 'package:wallet_app/product/all_colors.dart';
 import 'package:wallet_app/product/all_paddings.dart';
 import 'package:wallet_app/product/all_strings.dart';
-import 'package:wallet_app/product/login_alert.dart';
+import 'package:wallet_app/product/login_signup_alert.dart';
 import 'package:wallet_app/view/user_list/model/user_model.dart';
 
 class SignupPage extends StatefulWidget {
@@ -60,9 +60,11 @@ class _SignupPageState extends State<SignupPage> {
                   fieldInputType: TextInputType.number,
                   maxLength: 6,
                   invisibleBool: true),
-              if (_signupErrorBoth) LoginFailed(text: AllStrings().signupFailedBoth),
-              if (_signupErrorUsername) LoginFailed(text: AllStrings().signupFailedUsername),
-              if (_signupErrorEmail) LoginFailed(text: AllStrings().signupFailedEmail),
+              if (_signupErrorBoth) LoginFailed(text: AllStrings().signupFailedBoth, color: AllColors().errorContainer),
+              if (_signupErrorUsername)
+                LoginFailed(text: AllStrings().signupFailedUsername, color: AllColors().errorContainer),
+              if (_signupErrorEmail)
+                LoginFailed(text: AllStrings().signupFailedEmail, color: AllColors().errorContainer),
               MainButton(
                 text: AllStrings().signup,
                 onPressed: () {
@@ -127,6 +129,19 @@ class _SignupPageState extends State<SignupPage> {
       final result = await DatabaseService().userDatabaseProvider.insert(userModel);
       if (result) {
         print('Kullanıcı başarıyla eklendi.');
+        Future.delayed(const Duration(seconds: 3), () {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginPage()),
+            (route) => false,
+          );
+        });
+        showDialog(
+            barrierColor: Colors.black.withOpacity(0.5),
+            context: context,
+            builder: (BuildContext context) {
+              return const SignedInSuccessfully();
+            });
       } else {
         print('Kullanıcı eklenirken bir hata oluştu.');
       }
