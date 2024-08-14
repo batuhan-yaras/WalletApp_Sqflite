@@ -8,7 +8,7 @@ I created a database, which is holding; id, email, username, password, money
 You can login into your Wallet Account if you already have one. If you don't, you can push the Sign up button below.
 
 ### Preview For Register Page:
-<img src="/assets/GithubImages/3.jpg" width = 200px>...<img src="/assets/GithubImages/4.jpg" width = 200px>...<img src="/assets/GithubImages/5.jpg" width = 200px>...<img src="/assets/GithubImages/6.jpg" width = 200px>
+<img src="/assets/GithubImages/3.jpg" width = 200px>..<img src="/assets/GithubImages/4.jpg" width = 200px>..<img src="/assets/GithubImages/5.jpg" width = 200px>..<img src="/assets/GithubImages/6.jpg" width = 200px>
 <br><br>You can register in this page by writing your email address, username and password.<br><br><img src="/assets/GithubImages/7.jpg" width = 200px><br><br>If you signed up, you can login now.<br>
 ### Wallet Information and Transfer Page:
 <img src="/assets/GithubImages/8.jpg" width = 200px>.....<img src="/assets/GithubImages/9.jpg" width = 200px>
