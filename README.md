@@ -1,19 +1,23 @@
-# Wallet App Using Sqflite
+# Wallet App Using SQFlite
 
-A Flutter project you can create your wallet and transfer some money to the other wallet accounts.
-I created a database, which is holding; id, email, username, password, money
+### This Flutter project allows you to create a wallet, do money farming, and transfer funds between wallet accounts. The app uses the 'SQFlite' for managing database.
+<br><br>
 
-### Preview For Login Page:
-<img src="/assets/GithubImages/1.jpg" width = 200px>.....<img src="/assets/GithubImages/2.jpg" width = 200px><br><br>
-You can login into your Wallet Account if you already have one. If you don't, you can push the Sign up button below.
+### Preview For Login and Register Page:
 
-### Preview For Register Page:
-<img src="/assets/GithubImages/3.jpg" width = 200px>..<img src="/assets/GithubImages/3v2.jpg" width = 200px>..<img src="/assets/GithubImages/4.jpg" width = 200px>..<img src="/assets/GithubImages/5.jpg" width = 200px>
-<br><br>You can register in this page by writing your email address, username and password.<br><br><img src="/assets/GithubImages/7.jpg" width = 200px><br><br>If you signed up, you can login now.<br>
-### Wallet Information and Transfer Page:
-<img src="/assets/GithubImages/8.jpg" width = 200px>.....<img src="/assets/GithubImages/9.jpg" width = 200px>
-<br><br>You can see your information on the first page such as;<br>your email address, your username, how much money do you have in your account and your Wallet ID<br><br>
+<img src="/assets/GithubImages/1.jpg" width = 250px>...<img src="/assets/GithubImages/2.jpg" width = 250px>...<img src="/assets/GithubImages/3.jpg" width = 250px><br><br>
+#### If you already have a wallet account, log in using your credentials. If not, use the 'Sign Up' button to create a new account.<br><br><br>
+
+<img src="/assets/GithubImages/4.jpg" width = 250px>...<img src="/assets/GithubImages/5.gif" width = 250px>...|...|...<img src="/assets/GithubImages/7.jpg" width = 250px><br><br>
+#### You can view your details including email, username, account balance, and Wallet ID on the Information Page.<br><br> Every new account starts with a $100 balance, and you can earn additional funds through the farming feature. Each click on the farming page adds $0.50 to your account balance.<br><br>
+
 
 ### Money Transfer:
-<img src="/assets/GithubImages/8v2.jpg" width = 200px>.....<img src="/assets/GithubImages/10.jpg" width = 200px>.....<img src="/assets/GithubImages/11.jpg" width = 200px>.....<img src="/assets/GithubImages/12.jpg" width = 200px>
-<br><br>You can transfer your money to another account by just typing the receiver username and receiver's wallet ID.<br><br>
+
+<img src="/assets/GithubImages/8.jpg" width = 250px>...<img src="/assets/GithubImages/9.jpg" width = 250px>
+<br><br><br><br>
+<img src="/assets/GithubImages/10.jpg" width = 250px>...<img src="/assets/GithubImages/11.jpg" width = 250px>
+<br><br>
+#### To transfer money, enter the recipient's username, Wallet ID, and the amount you wish to send.<br><br><br>
+
+'Forgot your password?' button has no function right now.
