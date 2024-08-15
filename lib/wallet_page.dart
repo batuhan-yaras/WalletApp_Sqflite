@@ -6,6 +6,7 @@ import 'package:wallet_app/login_page.dart';
 import 'package:wallet_app/product/all_colors.dart';
 import 'package:wallet_app/product/all_paddings.dart';
 import 'package:wallet_app/product/all_strings.dart';
+import 'package:wallet_app/product/animate_gesture_detector.dart';
 import 'package:wallet_app/product/login_signup_alert.dart';
 import 'package:wallet_app/product/username_avatar_image.dart';
 import 'package:wallet_app/view/user_list/model/user_database_provider.dart';
@@ -31,6 +32,8 @@ class _WalletPageViewState extends State<WalletPageView> {
   final UserDatabaseProvider _userDatabaseProvider = UserDatabaseProvider();
 
   late double _currentMoney;
+
+  late MaterialColor imageColorTemp;
   @override
   void initState() {
     super.initState();
@@ -62,7 +65,7 @@ class _WalletPageViewState extends State<WalletPageView> {
       return;
     }
 
-    if (amount <= 0 || amount > widget.money) {
+    if (amount <= 0 || amount > _currentMoney) {
       print('Geçersiz miktar.');
       return;
     }
@@ -82,10 +85,17 @@ class _WalletPageViewState extends State<WalletPageView> {
     });
   }
 
+  Future<void> _updateMoneyTap() async {
+    setState(() {
+      _userDatabaseProvider.updateMoney(0.5, widget.id);
+      _currentMoney += 0.5;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2, // Sekme sayısı
+      length: 3, // Sekme sayısı
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: AllColors().bgColorFirst,
@@ -127,21 +137,17 @@ class _WalletPageViewState extends State<WalletPageView> {
                   Divider(
                     color: TextFieldColors().fieldLabelColor,
                   ),
-                  _sizedBoxHalf(),
+                  _sizedBoxFull(),
                   WalletInfoTitle(text: AllStrings().emailAdress),
-                  _sizedBoxHalf(),
                   WalletInfoSubtitle(text: widget.email),
                   _sizedBoxFull(),
                   WalletInfoTitle(text: AllStrings().username),
-                  _sizedBoxHalf(),
                   WalletInfoSubtitle(text: widget.username),
                   _sizedBoxFull(),
                   WalletInfoTitle(text: AllStrings().amountOfMoney),
-                  _sizedBoxHalf(),
                   WalletInfoSubtitle(text: '$_currentMoney \$'),
                   _sizedBoxFull(),
                   WalletInfoTitle(text: AllStrings().walletId),
-                  _sizedBoxHalf(),
                   WalletInfoSubtitle(text: '${widget.id}')
                 ])),
             Padding(
@@ -180,6 +186,10 @@ class _WalletPageViewState extends State<WalletPageView> {
                     fontSize: 12,
                   ),
                 ])),
+            AnimateGestureDetector(
+              onTap: _updateMoneyTap,
+              currentMoneyText: 'Current Money = $_currentMoney \$',
+            ),
           ],
         ),
         bottomNavigationBar: BottomAppBar(
@@ -190,6 +200,7 @@ class _WalletPageViewState extends State<WalletPageView> {
             tabs: [
               Tab(text: AllStrings().walletInfo),
               Tab(text: AllStrings().sendMoney),
+              Tab(text: AllStrings().farming),
             ],
             labelColor: TextFieldColors().fieldTitleColor, // Sekme etiketlerinin rengi
             unselectedLabelColor: TextFieldColors().fieldLabelColor, // Seçilmemiş sekme etiketlerinin rengi

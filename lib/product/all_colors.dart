@@ -7,6 +7,8 @@ class AllColors {
   final Color errorColor = const Color.fromARGB(255, 180, 37, 37);
   final Color errorContainer = const Color.fromARGB(255, 94, 41, 41);
   final Color successfulColor = const Color.fromARGB(255, 62, 92, 54);
+  final Color dollarIconColor = const Color.fromARGB(255, 61, 94, 62);
+  final Color dollarIconColor2nd = const Color.fromARGB(255, 77, 158, 80);
 }
 
 class TextFieldColors {

@@ -193,4 +193,14 @@ class UserDatabaseProvider {
       */
     });
   }
+
+  Future<void> updateMoney(double farmAmount, int senderId) async {
+    final db = await getDatabase();
+    await db.transaction((txn) async {
+      await txn.rawUpdate(
+        'UPDATE $_userTableName SET $columnMoney = $columnMoney + ? WHERE $columnId = ?',
+        [farmAmount, senderId],
+      );
+    });
+  }
 }

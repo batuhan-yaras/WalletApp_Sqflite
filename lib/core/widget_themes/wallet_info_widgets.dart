@@ -21,6 +21,6 @@ class WalletInfoSubtitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(text,
-        style: Theme.of(context).textTheme.labelLarge?.copyWith(color: TextFieldColors().fieldBorderColor));
+        style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: TextFieldColors().fieldBorderColor));
   }
 }

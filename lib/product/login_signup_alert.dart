@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/product/all_colors.dart';
 import 'package:wallet_app/product/all_paddings.dart';
-import 'package:wallet_app/product/all_strings.dart';
 
 class LoginFailed extends StatelessWidget {
   const LoginFailed({super.key, required this.text, required this.color});

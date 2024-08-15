@@ -30,4 +30,6 @@ class AllStrings {
   final registerSubTitle = 'You are going to be directed to the login page in 3 seconds.';
   final transferTitle = 'Successful';
   final transferSubTitle = 'You transferred your money successfully.';
+
+  final farmingIconAsset = 'assets/dollarIcon.png';
 }
