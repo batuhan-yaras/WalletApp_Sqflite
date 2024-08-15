@@ -7,11 +7,10 @@ import 'package:wallet_app/product/all_colors.dart';
 import 'package:wallet_app/product/all_paddings.dart';
 import 'package:wallet_app/product/all_strings.dart';
 import 'package:wallet_app/product/animate_gesture_detector.dart';
-import 'package:wallet_app/product/login_signup_alert.dart';
+import 'package:wallet_app/core/login_signup_alert.dart';
 import 'package:wallet_app/product/username_avatar_image.dart';
 import 'package:wallet_app/view/user_list/model/user_database_provider.dart';
 
-//herkese rastgele money atayacağım. Chatgpt de var.
 class WalletPageView extends StatefulWidget {
   final String email;
   final String username;

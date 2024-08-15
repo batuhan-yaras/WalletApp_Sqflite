@@ -8,7 +8,7 @@ import 'package:wallet_app/login_page.dart';
 import 'package:wallet_app/product/all_colors.dart';
 import 'package:wallet_app/product/all_paddings.dart';
 import 'package:wallet_app/product/all_strings.dart';
-import 'package:wallet_app/product/login_signup_alert.dart';
+import 'package:wallet_app/core/login_signup_alert.dart';
 import 'package:wallet_app/view/user_list/model/user_model.dart';
 
 class SignupPage extends StatefulWidget {

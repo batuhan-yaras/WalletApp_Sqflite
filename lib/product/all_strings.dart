@@ -32,4 +32,6 @@ class AllStrings {
   final transferSubTitle = 'You transferred your money successfully.';
 
   final farmingIconAsset = 'assets/dollarIcon.png';
+
+  final mailSubject = 'Your Informations!';
 }

@@ -6,9 +6,11 @@ import 'package:wallet_app/product/all_paddings.dart';
 import 'package:wallet_app/product/all_strings.dart';
 import 'package:wallet_app/core/widget_themes/text_field_widget.dart';
 import 'package:wallet_app/core/widget_themes/title_styles.dart';
-import 'package:wallet_app/product/login_signup_alert.dart';
+import 'package:wallet_app/core/login_signup_alert.dart';
+import 'package:wallet_app/product/forgot_password.dart';
 import 'package:wallet_app/signup_page.dart';
 import 'package:wallet_app/view/user_list/model/user_database_provider.dart';
+import 'package:wallet_app/view/user_list/model/user_model.dart';
 import 'package:wallet_app/wallet_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -23,10 +25,14 @@ class _LoginPageState extends State<LoginPage> {
   final UserDatabaseProvider _userDatabaseProvider = UserDatabaseProvider();
   bool _loginFailed = false;
 
+  String? _widgetUsername;
+  String? _widgetPassword;
+
   @override
   void initState() {
     super.initState();
     _userDatabaseProvider.open(); // Veritabanı bağlantısını aç
+    _userDatabaseProvider.delete(23);
   }
 
   Future<void> _login() async {
@@ -36,6 +42,10 @@ class _LoginPageState extends State<LoginPage> {
     final user = await _userDatabaseProvider.getUserByCredentials(username, password);
 
     if (user != null) {
+      setState(() {
+        _widgetUsername = user.username;
+        _widgetPassword = user.password.toString();
+      });
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -86,7 +96,13 @@ class _LoginPageState extends State<LoginPage> {
                 alignment: Alignment.centerRight,
                 child: TextButtonRow(
                   text: AllStrings().forgotPassword,
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const EmailSenderAlertDialog();
+                        });
+                  },
                 ),
               ),
               if (_loginFailed)

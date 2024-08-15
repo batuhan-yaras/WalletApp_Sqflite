@@ -155,6 +155,21 @@ class UserDatabaseProvider {
     }
   }
 
+  Future<UserModel?> getUserByEmail(String email) async {
+    await getDatabase();
+
+    final userMaps = await database!.query(
+      _userTableName,
+      where: 'email = ?',
+      whereArgs: [email],
+    );
+    if (userMaps.isNotEmpty) {
+      return UserModel.fromJson(userMaps.first);
+    } else {
+      return null;
+    }
+  }
+
   Future<void> createTransferTable(Database db) async {
     await db.execute(
       '''CREATE TABLE $_transferTableName (

@@ -9,6 +9,7 @@ class AllColors {
   final Color successfulColor = const Color.fromARGB(255, 62, 92, 54);
   final Color dollarIconColor = const Color.fromARGB(255, 61, 94, 62);
   final Color dollarIconColor2nd = const Color.fromARGB(255, 77, 158, 80);
+  final Color forgotPasswordBG = const Color.fromARGB(255, 114, 55, 55);
 }
 
 class TextFieldColors {
