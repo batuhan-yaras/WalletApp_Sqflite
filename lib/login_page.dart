@@ -32,7 +32,6 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     super.initState();
     _userDatabaseProvider.open(); // Veritabanı bağlantısını aç
-    _userDatabaseProvider.delete(23);
   }
 
   Future<void> _login() async {
