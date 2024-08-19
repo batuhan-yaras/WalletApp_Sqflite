@@ -96,8 +96,8 @@ class _EmailSenderAlertDialogState extends State<EmailSenderAlertDialog> {
     try {
       final user = await _userDatabaseProvider.getUserByEmail(recipientEmail);
 
-      String username = 'bthnyrs@gmail.com';
-      String password = 'bxez gwlt olhl jbsf';
+      String username = 'your_email';
+      String password = 'your_password';
 
       final smtpServer = gmail(username, password); // Gmail SMTP sunucusunu kullan
 
