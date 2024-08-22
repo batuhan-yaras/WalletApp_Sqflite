@@ -10,7 +10,6 @@ import 'package:wallet_app/core/login_signup_alert.dart';
 import 'package:wallet_app/product/forgot_password.dart';
 import 'package:wallet_app/signup_page.dart';
 import 'package:wallet_app/view/user_list/model/user_database_provider.dart';
-import 'package:wallet_app/view/user_list/model/user_model.dart';
 import 'package:wallet_app/wallet_page.dart';
 
 class LoginPage extends StatefulWidget {

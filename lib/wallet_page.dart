@@ -46,7 +46,7 @@ class _WalletPageViewState extends State<WalletPageView> {
     final amountString = _amountController.text.trim();
 
     if (username.isEmpty || walletIdString.isEmpty || amountString.isEmpty) {
-      print('Transfer başarısız.');
+      print('Transfer failed');
       return;
     }
 
@@ -54,7 +54,6 @@ class _WalletPageViewState extends State<WalletPageView> {
     final amount = double.tryParse(amountString);
 
     if (walletId == null || amount == null) {
-      print('Transfer başarısız.2');
       return;
     }
 

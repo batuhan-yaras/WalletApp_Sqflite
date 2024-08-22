@@ -128,7 +128,7 @@ class _SignupPageState extends State<SignupPage> {
 
       final result = await DatabaseService().userDatabaseProvider.insert(userModel);
       if (result) {
-        print('Kullanıcı başarıyla eklendi.');
+        print('Succesfully signed up.');
         Future.delayed(const Duration(seconds: 3), () {
           Navigator.pushAndRemoveUntil(
             context,
@@ -144,7 +144,7 @@ class _SignupPageState extends State<SignupPage> {
                   textTitle: AllStrings().successfulRegister, textSubtitle: AllStrings().registerSubTitle);
             });
       } else {
-        print('Kullanıcı eklenirken bir hata oluştu.');
+        print('ERROR');
       }
     }
   }
