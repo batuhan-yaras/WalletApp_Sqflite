@@ -22,6 +22,6 @@
 
 <img src="/assets/GithubImages/8.jpg" width = 250px>...<img src="/assets/GithubImages/9.jpg" width = 250px>
 
-#### To transfer money, enter the recipient's username, Wallet ID, and the amount you wish to send.<br><br><br>
+#### To transfer money, enter the recipient's username, Wallet ID, and the amount you wish to send<br><br><br>
 <img src="/assets/GithubImages/10.jpg" width = 250px>...<img src="/assets/GithubImages/11.jpg" width = 250px>
 
